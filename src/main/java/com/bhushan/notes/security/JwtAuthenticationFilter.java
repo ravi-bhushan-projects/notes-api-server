@@ -6,7 +6,6 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -60,6 +59,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .collect(Collectors.toSet());
         String token = Jwts.builder()
                 .signWith(Keys.hmacShaKeyFor(JwtConstants.JWT_SECRET.getBytes()), SignatureAlgorithm.HS512)
+                .setIssuer(JwtConstants.TOKEN_ISSUER)
+                .setAudience(JwtConstants.TOKEN_AUDIENCE)
                 .setSubject(user.getUsername())
                 .setExpiration(Date.from(Instant.now().plusSeconds(3600)))
                 .claim("role", roles).compact();

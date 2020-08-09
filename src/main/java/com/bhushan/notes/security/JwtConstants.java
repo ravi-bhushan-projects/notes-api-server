@@ -6,6 +6,9 @@ public class JwtConstants {
 
     // JWT token defaults
     public static final String TOKEN_PREFIX = "Bearer";
+    public static final String TOKEN_TYPE = "JWT";
+    public static final String TOKEN_ISSUER = "notes-app";
+    public static final String TOKEN_AUDIENCE = "secure-app";
     public static final String TOKEN_COOKIE = "auth-token";
 
     private JwtConstants() {
